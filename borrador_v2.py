@@ -111,8 +111,6 @@ class CountryGuesser:
             st.session_state.hints.append(hint)
         elif st.session_state.wrong_guesses == 6:
             st.text(f"Warning Adventurer, this is your last chance!")
-            hint = f"Flag emoji: {country['emoji']}"
-            st.session_state.hints.append(hint)
         if st.session_state.wrong_guesses == 7:
             self.game_lost()
         self.display_hints()
@@ -164,3 +162,10 @@ class CountryGuesser:
             st.session_state.average_score = st.session_state.total_score / st.session_state.right_guesses
         except ZeroDivisionError:
             st.session_state.average_score = st.session_state.total_score
+    
+    def calculate_average_guesses(self):
+        try:
+            return st.session_state.total_guesses / st.session_state.right_guesses
+        except ZeroDivisionError:
+            return st.session_state.total_guesses
+    
